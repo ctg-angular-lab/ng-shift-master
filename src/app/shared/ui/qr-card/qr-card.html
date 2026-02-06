@@ -1,0 +1,7 @@
+<div class="qr-container">
+  @if (url()) {
+    <img [src]="url()" alt="QR de accesso a turnos">
+  } @else {
+    <div class="loading">Cargando codigo QR...</div>
+  }
+</div>
