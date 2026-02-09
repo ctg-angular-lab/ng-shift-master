@@ -1,6 +1,6 @@
 import { Component, inject} from '@angular/core';
-import { QrCard } from "../../../../shared/ui/qr-card/qr-card";
-import { QrService } from "../../../../core/services/qr.service";
+import { QrCard } from "@shared/ui/qr-card/qr-card";
+import { QrService } from "@services/qr.service";
 @Component({
   selector: 'app-qr-page',
   standalone: true,
