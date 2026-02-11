@@ -1,0 +1,7 @@
+@for (item of waitingList(); track $index) {
+    <li>
+        {{ item.user.firstName }} - {{ item.isPriority ? 'PRIORITY' : 'NORMAL' }}
+    </li>
+} @empty {
+  <li>No Users in waiting list</li>
+}
