@@ -16,9 +16,10 @@
     "module": "preserve",
     "baseUrl": "./",
     "paths": {
+      "@core/*": ["src/app/core/*"],
+      "@features/*": ["src/app/features/*"],
       "@services/*": ["src/app/core/services/*"],
       "@shared/*": ["src/app/shared/*"],
-      "@features/*": ["src/app/features/*"],
     }
 
   },
