@@ -1,0 +1,61 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form">
+  <!-- Nombre -->
+  <div class="field">
+    <label>Nombre</label>
+    <input type="text" formControlName="firstName" placeholder="Ingresa tu nombre" />
+    @if (getErrorMessage('firstName'); as msg) {
+      <small class="error">{{ msg }}</small>
+    }
+  </div>
+
+  <!-- Apellido -->
+  <div class="field">
+    <label>Apellido</label>
+    <input type="text" formControlName="lastName" placeholder="Ingresa tu apellido" />
+    @if (getErrorMessage('lastName'); as msg) {
+      <small class="error">{{ msg }}</small>
+    }
+  </div>
+
+  <!-- Email -->
+  <div class="field">
+    <label>Correo</label>
+    <input type="email" formControlName="email" placeholder="correo@dominio.com" />
+    @if (getErrorMessage('email'); as msg) {
+      <small class="error">{{ msg }}</small>
+    }
+  </div>
+
+  <!-- Fecha de nacimiento -->
+  <div class="field">
+    <label>Fecha de Nacimiento</label>
+    <input type="date" formControlName="birthDate" />
+    @if (getErrorMessage('birthDate'); as msg) {
+      <small class="error">{{ msg }}</small>
+    }
+  </div>
+
+  <!-- Advertencia por menor de edad -->
+  @if (isMinor()) {
+    <div class="warning">
+      Recuerda que para ciertos procesos bancarios necesitas la compañía de un adulto responsable
+    </div>
+  }
+
+  <!-- Toggles -->
+  <div class="toggles">
+    <label class="toggle">
+      <input type="checkbox" formControlName="isBankClient" />
+      <span>Es Cliente</span>
+    </label>
+
+    <label class="toggle">
+      <input type="checkbox" formControlName="isPriority" />
+      <span>Prioritario</span>
+    </label>
+  </div>
+
+  <div class="actions">
+    <button type="submit" [disabled]="form.invalid">Enviar</button>
+  </div>
+</form>
