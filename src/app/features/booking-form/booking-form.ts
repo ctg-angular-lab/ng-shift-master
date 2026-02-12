@@ -1,5 +1,7 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MATERIAL_MODULES } from '@shared/utils/material-modules';
+
 import { toSignal } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs';
 import { FORM_ERRORS } from "@core/form-validators/validators-form-constants";
@@ -14,14 +16,18 @@ import {
 @Component({
   selector: 'app-booking-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    MATERIAL_MODULES
+  ],
   templateUrl: './booking-form.html',
   styleUrl: './booking-form.scss',
 })
 
 export class BookingForm {
   readonly ERRORS = FORM_ERRORS;
-  private readonly fb = new FormBuilder();
+  private readonly fb = inject(FormBuilder); 
+  isLoading = signal(false);
 
   readonly form = this.fb.group({
     firstName: ['', [requiredTrimmed(), onlyLettersValidator()]],
@@ -93,15 +99,21 @@ export class BookingForm {
   }
 
   onSubmit(): void {
-    this.form.markAllAsTouched();
+    if (this.form.invalid || this.isLoading()) return;
 
-    if (this.form.invalid) return;
+    this.isLoading.set(true); // Bloqueamos el formulario
+    this.form.disable();      // Deshabilitamos inputs visualmente
 
-    // payload limpio
     const payload = this.form.getRawValue();
-    console.log('SUBMIT payload:', payload);
 
-    // Aquí llamarías tu service...
+    // Simulamos una llamada al servicio (o usa tu QueueService)
+    setTimeout(() => {
+      console.log('Turno generado con éxito', payload);
+
+      this.isLoading.set(false);
+      this.form.enable();
+      this.form.reset();
+    }, 2000);
   }
 
 }

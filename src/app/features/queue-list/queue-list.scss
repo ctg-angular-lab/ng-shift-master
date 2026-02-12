@@ -1,0 +1,64 @@
+.waiting-list {
+  display: grid;
+  gap: 12px;
+
+  &__card {
+    width: 100%;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__left {
+    min-width: 0; // permite ellipsis si el nombre crece
+    display: grid;
+    gap: 4px;
+  }
+
+  &__name {
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    opacity: 0.75;
+    line-height: 16px;
+    flex-wrap: wrap;
+  }
+
+  &__dot {
+    opacity: 0.6;
+  }
+
+  &__chipset {
+    flex-shrink: 0;
+  }
+
+  &__chip {
+    font-weight: 600;
+    letter-spacing: 0.2px;
+
+    &--priority {
+    }
+
+    &--normal {
+      opacity: 0.9;
+    }
+  }
+
+  &__empty {
+    text-align: center;
+    opacity: 0.85;
+  }
+}

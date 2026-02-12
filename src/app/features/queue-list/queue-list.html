@@ -1,7 +1,33 @@
-@for (item of waitingList(); track $index) {
-    <li>
-        {{ item.user.firstName }} - {{ item.isPriority ? 'PRIORITY' : 'NORMAL' }}
-    </li>
-} @empty {
-  <li>No Users in waiting list</li>
-}
+<div class="waiting-list">
+  @for (item of waitingList(); track item.id) {
+    <mat-card class="waiting-list__card" appearance="outlined">
+      <mat-card-content class="waiting-list__content">
+        <div class="waiting-list__left">
+          <div class="waiting-list__name">
+            {{ item.user.firstName }} {{ item.user.lastName }}
+          </div>
+
+          <div class="waiting-list__meta">
+            {{ item.ticketDate | date:'mediumDate' }}
+            @if (item.user.isBankClient) {
+              <span class="waiting-list__dot">•</span>
+              <span>Cliente</span>
+            }
+          </div>
+        </div>
+
+        <mat-chip-set class="waiting-list__chipset">
+          <mat-chip
+            [class]="'waiting-list__chip ' + (item.isPriority ? 'waiting-list__chip--priority' : 'waiting-list__chip--normal')"
+            selected>
+            {{ item.isPriority ? 'PRIORITY' : 'NORMAL' }}
+          </mat-chip>
+        </mat-chip-set>
+      </mat-card-content>
+    </mat-card>
+  } @empty {
+    <mat-card class="waiting-list__empty" appearance="outlined">
+      <mat-card-content>No Users in waiting list</mat-card-content>
+    </mat-card>
+  }
+</div>
