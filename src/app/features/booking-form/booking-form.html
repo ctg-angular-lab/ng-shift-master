@@ -1,61 +1,50 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form">
-  <!-- Nombre -->
-  <div class="field">
-    <label>Nombre</label>
-    <input type="text" formControlName="firstName" placeholder="Ingresa tu nombre" />
-    @if (getErrorMessage('firstName'); as msg) {
-      <small class="error">{{ msg }}</small>
-    }
+  
+  <div class="booking-form__grid">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="booking-form__grid--full-width">
+      <mat-label>Correo Electrónico</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="booking-form__grid--full-width">
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="birthDate">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
   </div>
 
-  <!-- Apellido -->
-  <div class="field">
-    <label>Apellido</label>
-    <input type="text" formControlName="lastName" placeholder="Ingresa tu apellido" />
-    @if (getErrorMessage('lastName'); as msg) {
-      <small class="error">{{ msg }}</small>
-    }
-  </div>
-
-  <!-- Email -->
-  <div class="field">
-    <label>Correo</label>
-    <input type="email" formControlName="email" placeholder="correo@dominio.com" />
-    @if (getErrorMessage('email'); as msg) {
-      <small class="error">{{ msg }}</small>
-    }
-  </div>
-
-  <!-- Fecha de nacimiento -->
-  <div class="field">
-    <label>Fecha de Nacimiento</label>
-    <input type="date" formControlName="birthDate" />
-    @if (getErrorMessage('birthDate'); as msg) {
-      <small class="error">{{ msg }}</small>
-    }
-  </div>
-
-  <!-- Advertencia por menor de edad -->
   @if (isMinor()) {
-    <div class="warning">
-      Recuerda que para ciertos procesos bancarios necesitas la compañía de un adulto responsable
+    <div class="booking-form__warning">
+      <mat-icon>info</mat-icon>
+      <span>Trámite requiere acompañamiento de un adulto.</span>
     </div>
   }
 
-  <!-- Toggles -->
-  <div class="toggles">
-    <label class="toggle">
-      <input type="checkbox" formControlName="isBankClient" />
-      <span>Es Cliente</span>
-    </label>
-
-    <label class="toggle">
-      <input type="checkbox" formControlName="isPriority" />
-      <span>Prioritario</span>
-    </label>
+  <div class="booking-form__toggles">
+    <mat-slide-toggle formControlName="isBankClient">Es cliente</mat-slide-toggle>
+    <mat-slide-toggle formControlName="isPriority">Prioritario</mat-slide-toggle>
   </div>
 
-  <div class="actions">
-    <button type="submit" [disabled]="form.invalid">Enviar</button>
+  <div class="booking-form__actions">
+    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || isLoading()">
+
+        @if (isLoading()) {
+        <mat-spinner diameter="20"></mat-spinner>
+        <span>Procesando...</span>
+        } @else {
+        <span>Confirmar Turno</span>
+        }
+    </button>
   </div>
 </form>
