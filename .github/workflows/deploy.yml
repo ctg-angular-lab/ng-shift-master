@@ -35,7 +35,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/ng-shift-master/browser # Ruta donde Angular v21 genera el build
+          path: dist/shift-master/browser # Ruta donde Angular v21 genera el build
 
       - name: Deploy to GitHub Pages
         id: deployment
