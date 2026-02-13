@@ -1,23 +1,33 @@
 @use '@angular/material' as mat;
+@use './styles/theme-colors' as shift-pallete;
 
 @include mat.core();
 
 $my-theme: mat.define-theme((
-  color: (
+color: (
     theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
+    primary:shift-pallete.$primary-palette,
+    tertiary:shift-pallete.$tertiary-palette,
   ),
   typography: (
-    brand-family: 'Roboto, sans-serif',
+    brand-family: 'Inter, sans-serif',
+    plain-family: 'Inter, sans-serif',
   ),
-  // CORRECCIÓN AQUÍ:
   density: (
-    scale: 0 // Usa 'scale' en lugar de pasar el valor directo
+    scale: 0,
   ),
 ));
 
 html {
-  // Aplicar el tema globalmente
   @include mat.all-component-themes($my-theme);
+
+  background-color: #f6f6f8;
+  margin: 0;
+  height: 100%;
+}
+
+
+:root {
+  --mat-sys-shape-corner-medium: 0.75rem;
+  --mat-sys-shape-corner-large: 1rem;
 }
