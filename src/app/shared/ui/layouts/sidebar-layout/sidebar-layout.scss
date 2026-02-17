@@ -1,0 +1,28 @@
+.layout-wrapper {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+
+    @media (max-width: 768px) {
+        flex-direction: column-reverse; // Aside abajo en móvil (según tu requerimiento)
+    }
+}
+
+.sidebar {
+    background-color: var(--mat-sys-primary);
+    width: 25%;
+    max-width: 300px;
+    color: white;
+    padding: 10px;
+    @media (max-width: 768px) {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+.main-content {
+    flex: 1;
+    background-color: var(--mat-sys-surface-container-lowest);
+    border-radius: 10px;
+    padding: 10px;
+}

@@ -1,33 +1,52 @@
 @use '@angular/material' as mat;
-@use './styles/theme-colors' as shift-pallete;
+@use './styles/theme-colors' as theme; 
 
 @include mat.core();
 
+// Definimos el tema asegurando que las paletas sean las correctas
 $my-theme: mat.define-theme((
-color: (
+  color: (
     theme-type: light,
-    primary:shift-pallete.$primary-palette,
-    tertiary:shift-pallete.$tertiary-palette,
+    primary: theme.$primary-palette,
+    tertiary: theme.$tertiary-palette,
   ),
   typography: (
-    brand-family: 'Inter, sans-serif',
-    plain-family: 'Inter, sans-serif',
+    brand-family: 'Roboto, sans-serif',
+    plain-family: 'Roboto, sans-serif',
   ),
   density: (
     scale: 0,
   ),
 ));
 
-html {
+// Aplicamos el tema en :root para máxima visibilidad de variables
+:root {
   @include mat.all-component-themes($my-theme);
-
-  background-color: #f6f6f8;
-  margin: 0;
-  height: 100%;
+  @include mat.typography-hierarchy($my-theme);
+  // PRUEBA DE FUEGO: Forzamos la variable si el mixin falla
+  // Esto extraerá el color directamente del objeto Sass
+  --mat-sys-primary: #{mat.get-theme-color($my-theme, primary, 40)};
+  --mat-sys-on-primary: #{mat.get-theme-color($my-theme, primary, 100)};
+  --mat-sys-highlighted: #{mat.get-theme-color($my-theme, primary, 60)};
+  --mat-sys-tertiary: #{mat.get-theme-color($my-theme, tertiary, 40)};
+  --mat-sys-priority: #{mat.get-theme-color($my-theme, error, 80)};
+  --mat-sys-surface-container-low: #{mat.get-theme-color($my-theme, secondary, 99)};
+  --mat-sys-surface-container-lowest: #{mat.get-theme-color($my-theme, secondary, 95)};
+  --mat-sys-on-surface-variant: #{mat.get-theme-color($my-theme, neutral-variant, 80)};
+  --mat-chip-label-text-color: #{mat.get-theme-color($my-theme, neutral, 100)};
+  --mat-card-filled-container-color: #{mat.get-theme-color($my-theme, error, 90)};
+  --mat-sys-surface-container-highest: #{mat.get-theme-color($my-theme, secondary, 100)};
 }
 
-
-:root {
-  --mat-sys-shape-corner-medium: 0.75rem;
-  --mat-sys-shape-corner-large: 1rem;
+html, body {
+  margin: 0;
+  height: 100%;
+  background-color: var(--mat-sys-surface-container-lowest, #f6f6f8);
+  font-family: 'Inter', sans-serif !important;
+  letter-spacing: 0.2px;
+  h1{
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 32px;
+  }
 }

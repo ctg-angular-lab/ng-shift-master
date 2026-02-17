@@ -8,6 +8,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from "@angular/material/card";
 import { MatChipsModule } from "@angular/material/chips";
+import {MatListModule} from '@angular/material/list';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 
 export const MATERIAL_MODULES = [
   MatFormFieldModule,
@@ -19,5 +23,9 @@ export const MATERIAL_MODULES = [
   MatSlideToggleModule,
   MatProgressSpinnerModule,
   MatChipsModule,
-  MatCardModule
+  MatCardModule,
+  MatListModule,
+  MatSidenavModule,
+  MatSidenav,
+  MatToolbarModule,
 ];
