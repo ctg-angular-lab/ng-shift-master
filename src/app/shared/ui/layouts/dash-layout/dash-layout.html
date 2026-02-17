@@ -1,0 +1,30 @@
+<mat-sidenav-container class="admin-container">
+      <mat-sidenav #sidenav mode="side" class="admin-sidenav">
+        <div class="sidenav-wrapper">
+          <header class="brand-section">
+            <ng-content select="[brand-logo]"></ng-content>
+          </header>
+          
+          <nav class="nav-section">
+            <ng-content select="[nav-actions]"></ng-content>
+          </nav>
+        </div>
+      </mat-sidenav>
+
+      <mat-sidenav-content class="admin-main">
+        <mat-toolbar class="admin-toolbar">
+          <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span class="toolbar-title">{{ pageTitle }}</span>
+          
+          <span class="spacer"></span>
+          
+          <ng-content select="[header-actions]"></ng-content>
+        </mat-toolbar>
+
+        <div class="admin-page-body">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>

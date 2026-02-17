@@ -50,9 +50,17 @@
     letter-spacing: 0.2px;
 
     &--priority {
+      background-color: var(--mat-sys-priority)!important;
+      color: var(--mat-sys-on-primary)!important;
+      --mdc-chip-container-color: var(--mat-sys-priority) !important;
+      --mdc-chip-label-text-color: var(--mat-sys-priority) !important;
+      .mdc-evolution-chip__icon--primary {
+        color: #FFF!important;
+      }
     }
-
     &--normal {
+      background-color: var(--mat-sys-highlighted)!important;
+      color: var(--mat-sys-primary)!important;      
       opacity: 0.9;
     }
   }

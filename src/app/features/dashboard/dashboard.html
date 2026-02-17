@@ -1,0 +1,23 @@
+<app-dash-layout [pageTitle]="'Panel de Control'">
+  
+  <div brand-logo class="flex items-center gap-2">
+    <mat-icon color="primary">account_balance</mat-icon>
+    <b style="color: var(--mat-sys-primary)">METROBANK</b>
+  </div>
+
+  <mat-nav-list nav-actions>
+    <a mat-list-item routerLink="/waiting-list" routerLinkActive="active-item">
+      <mat-icon matListItemIcon>queue</mat-icon>
+      <span matListItemTitle>Lista de Espera</span>
+    </a>
+    <a mat-list-item routerLink="/users" routerLinkActive="active-item">
+      <mat-icon matListItemIcon>people</mat-icon>
+      <span matListItemTitle>Usuarios</span>
+    </a>
+  </mat-nav-list>
+
+  <button header-actions mat-icon-button>
+    <mat-icon>notifications</mat-icon>
+  </button>
+
+</app-dash-layout>

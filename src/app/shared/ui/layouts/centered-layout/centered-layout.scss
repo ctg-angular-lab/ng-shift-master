@@ -1,0 +1,21 @@
+.external-container {
+    background-color: var(--mat-sys-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10%; // Respuesta responsiva: 10% de margen
+}
+
+.internal-card {
+    background-color: var(--mat-sys-surface-container-low, white); // Equivale al #f3f6fe aprox
+    width: 100%;
+    max-width: 1260px; // Corregido de 10260px a una escala real
+    min-height: 80vh;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--mat-sys-level3-shadow);
+}
