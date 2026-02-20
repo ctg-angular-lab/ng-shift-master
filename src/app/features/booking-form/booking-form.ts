@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MATERIAL_MODULES } from '@shared/utils/material-modules';
-
+import { CenteredLayout } from '@shared/ui/layouts/centered-layout/centered-layout';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs';
 import { FORM_ERRORS } from "@core/form-validators/validators-form-constants";
@@ -18,6 +18,7 @@ import {
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    CenteredLayout,
     MATERIAL_MODULES
   ],
   templateUrl: './booking-form.html',
