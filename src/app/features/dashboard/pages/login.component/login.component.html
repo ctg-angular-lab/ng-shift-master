@@ -1,0 +1,30 @@
+<app-centered-layout>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="booking-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input matInput formControlName="username">
+            @if (getErrorMessage('username'); as msg) {
+            <mat-error>{{ msg }}</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" formControlName="password">
+            @if (getErrorMessage('password'); as msg) {
+            <mat-error>{{ msg }}</mat-error>
+            }
+        </mat-form-field>
+
+        <div class="booking-form__actions">
+            <button mat-flat-button color="primary" type="submit" [disabled]="isLoading()">
+                @if (isLoading()) {
+                <mat-spinner diameter="20"></mat-spinner>
+                <span>Procesando...</span>
+                } @else {
+                <span>Iniciar Sesión</span>
+                }
+            </button>
+        </div>
+    </form>
+</app-centered-layout>

@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, ValidatorFn, FormGroup } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { FORM_PATTERNS } from './validators-form-constants';
 
 
@@ -65,3 +65,26 @@ function isAtLeastAge(birthDate: Date, minAge: number): boolean {
   return age >= minAge;
 }
 
+export function usernameValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+
+    if (!value) return null; // required se valida aparte
+
+    return FORM_PATTERNS.USERNAME.test(String(value).trim())
+      ? null
+      : { usernameInvalid: true };
+  };
+}
+
+export function passwordValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+
+    if (!value) return null;
+
+    return FORM_PATTERNS.PASSWORD.test(String(value).trim())
+      ? null
+      : { passwordInvalid: true };
+  };
+}

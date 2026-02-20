@@ -1,28 +1,29 @@
 import { Routes } from '@angular/router';
 import { QrPage } from './features/qr-display/qr-page';
-import { QueueList } from '@features/queue-list/queue-list';
+import { QueueList } from '@features/queue-list/pages/queue-list.component/queue-list';
 import { BookingForm } from '@features/booking-form/booking-form';
-import { Dashboard } from '@features/dashboard/dashboard';
+import { Dashboard } from '@features/dashboard/pages/dashboard.component/dashboard';
+import { LoginComponent } from '@features/dashboard/pages/login.component/login.component';
 
 export const routes: Routes = [
-  {path:'', component: QrPage},
-  {path:'waiting-list', component: QueueList},
-  {path:'booking-form', component: BookingForm},
-{
-    path: 'admin',
-    component: Dashboard,
-    /** For demonstration purposes, we are loading the dashboard component directly.
-    children: [
-      {
-        path: 'waiting-list',
-        loadComponent: () => import('./features/waiting-list/waiting-list.component').then(m => m.WaitingListComponent)
-      },
-      {
-        path: 'stats',
-        loadComponent: () => import('./features/stats/stats.component').then(m => m.StatsComponent)
-      }
-    ]
-      */
+  {
+    path:'', 
+    loadComponent: () => import('./features/qr-display/qr-page').then(m => m.QrPage)
   },
-
+  {
+    path:'waiting-list', 
+    loadComponent: () => import('./features/queue-list/pages/queue-list.component/queue-list').then(m => m.QueueList)
+  },
+  {
+    path:'booking-form', 
+    loadComponent: () => import('./features/booking-form/booking-form').then(m => m.BookingForm)
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./features/dashboard/pages/login.component/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: 'dashboard',
+    loadComponent: () => import('./features/dashboard/pages/dashboard.component/dashboard').then(m => m.Dashboard)
+  }
 ];

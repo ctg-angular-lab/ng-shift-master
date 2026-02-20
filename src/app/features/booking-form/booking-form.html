@@ -1,50 +1,62 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form">
-  
-  <div class="booking-form__grid">
-    <mat-form-field appearance="outline">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="firstName">
-    </mat-form-field>
+<app-centered-layout>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Apellido</mat-label>
-      <input matInput formControlName="lastName">
-    </mat-form-field>
 
-    <mat-form-field appearance="outline" class="booking-form__grid--full-width">
-      <mat-label>Correo Electrónico</mat-label>
-      <input matInput formControlName="email">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="booking-form__grid--full-width">
-      <mat-label>Fecha de Nacimiento</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="birthDate">
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div>
-
-  @if (isMinor()) {
-    <div class="booking-form__warning">
-      <mat-icon>info</mat-icon>
-      <span>Trámite requiere acompañamiento de un adulto.</span>
-    </div>
-  }
-
-  <div class="booking-form__toggles">
-    <mat-slide-toggle formControlName="isBankClient">Es cliente</mat-slide-toggle>
-    <mat-slide-toggle formControlName="isPriority">Prioritario</mat-slide-toggle>
-  </div>
-
-  <div class="booking-form__actions">
-    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || isLoading()">
-
-        @if (isLoading()) {
-        <mat-spinner diameter="20"></mat-spinner>
-        <span>Procesando...</span>
-        } @else {
-        <span>Confirmar Turno</span>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form">  
+    <div class="booking-form__grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="firstName">
+        @if (getErrorMessage('firstName'); as msg) {
+        <mat-error>{{ msg }}</mat-error>
         }
-    </button>
-  </div>
-</form>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="lastName">
+        @if (getErrorMessage('lastName'); as msg) {
+        <mat-error>{{ msg }}</mat-error>
+        }        
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="booking-form__grid--full-width">
+        <mat-label>Correo Electrónico</mat-label>
+        <input matInput formControlName="email">
+        @if (getErrorMessage('email'); as msg) {
+        <mat-error>{{ msg }}</mat-error>
+        }        
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="booking-form__grid--full-width">
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  
+    @if (isMinor()) {
+      <div class="booking-form__warning">
+        <mat-icon>info</mat-icon>
+        <span>Trámite requiere acompañamiento de un adulto.</span>
+      </div>
+    }
+  
+    <div class="booking-form__toggles">
+      <mat-slide-toggle formControlName="isBankClient">Es cliente</mat-slide-toggle>
+      <mat-slide-toggle formControlName="isPriority">Prioritario</mat-slide-toggle>
+    </div>
+  
+    <div class="booking-form__actions">
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || isLoading()">
+  
+          @if (isLoading()) {
+          <mat-spinner diameter="20"></mat-spinner>
+          <span>Procesando...</span>
+          } @else {
+          <span>Confirmar Turno</span>
+          }
+      </button>
+    </div>
+  </form>
+</app-centered-layout>
