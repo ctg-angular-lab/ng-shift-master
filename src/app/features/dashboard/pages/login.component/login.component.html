@@ -16,6 +16,13 @@
             }
         </mat-form-field>
 
+        @if (loginError(); as err) {
+        <div class="booking-form__error">
+            <mat-icon aria-hidden="true">error</mat-icon>
+            <span>{{ err }}</span>
+        </div>
+        }
+        
         <div class="booking-form__actions">
             <button mat-flat-button color="primary" type="submit" [disabled]="isLoading()">
                 @if (isLoading()) {

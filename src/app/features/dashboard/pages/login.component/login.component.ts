@@ -4,6 +4,7 @@ import { MATERIAL_MODULES } from '@shared/utils/material-modules';
 import { FORM_ERRORS } from "@core/form-validators/validators-form-constants";
 import { CenteredLayout } from '@shared/ui/layouts/centered-layout/centered-layout';
 import { Router } from '@angular/router';
+import { AuthLogin } from "@services/auth.login";
 import {
   requiredTrimmed,
   usernameValidator,
@@ -26,9 +27,10 @@ export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   readonly ERRORS = FORM_ERRORS;
   isLoading = signal(false);
+  loginError = signal<string | null>(null);
   readonly submitted = signal(false);
-private readonly router = inject(Router);
-
+  private readonly router = inject(Router);
+  private readonly auth = inject(AuthLogin);
 
   readonly loginForm = this.fb.group({
     username: ['', [requiredTrimmed(), usernameValidator()]],
@@ -42,12 +44,10 @@ private readonly router = inject(Router);
     const show = ctrl.touched || this.submitted();
     if (!show) return null;
 
-    // 1) Required (viene como {required:true} por requiredTrimmed)
     if (ctrl.hasError('required')) {
       return this.ERRORS.required;
     }
 
-    // 2) Custom validators (usa las keys reales que devuelves)
     if (controlName === 'username' && ctrl.hasError('usernameInvalid')) {
       return this.ERRORS.usuarioIncorrecto;
     }
@@ -67,18 +67,29 @@ private readonly router = inject(Router);
     }
 
     this.isLoading.set(true);
+    this.loginError.set(null);
     this.loginForm.disable();
 
     const payload = this.loginForm.getRawValue();
+    const { username, password } = this.loginForm.getRawValue();
+    
+    const result = this.auth.login(username ?? '', password ?? '');
 
-    setTimeout(() => {
-      console.log('Login payload', payload);
-      this.router.navigateByUrl('/dashboard');
+    if (!result.success) {
+      // Credenciales inválidas => mensaje global (no ligado a un control)
+      this.loginError.set('Credenciales inválidas. Verifica usuario y contraseña.');
       this.isLoading.set(false);
       this.loginForm.enable();
-      this.loginForm.reset();
-      this.submitted.set(false);
-    }, 2000);
+      return;
+    }    
+
+    // ✅ Login OK: navegar y reemplazar historial
+    this.router.navigateByUrl('/dashboard');
+
+    // No hace falta reset() porque ya navegas, pero no molesta si lo dejas:
+    this.isLoading.set(false);
+    this.loginForm.enable();
+    this.loginForm.reset();    
   }
 
 
