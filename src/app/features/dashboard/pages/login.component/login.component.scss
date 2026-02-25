@@ -42,4 +42,11 @@
     gap: 1rem;
     margin-top: 1rem;
   }
+
+  &__error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0 0;
+  }  
 }

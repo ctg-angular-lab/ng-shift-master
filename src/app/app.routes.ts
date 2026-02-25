@@ -1,9 +1,4 @@
 import { Routes } from '@angular/router';
-import { QrPage } from './features/qr-display/qr-page';
-import { QueueList } from '@features/queue-list/pages/queue-list.component/queue-list';
-import { BookingForm } from '@features/booking-form/booking-form';
-import { Dashboard } from '@features/dashboard/pages/dashboard.component/dashboard';
-import { LoginComponent } from '@features/dashboard/pages/login.component/login.component';
 
 export const routes: Routes = [
   {
